@@ -26,3 +26,22 @@ states:
       - command: python3 -m pip install -r requirements.txt
       - command: python3 get-tweets.py -b jq(.bearer_token) -t jq(.twitter_searchstring) -m jq(.max_search_returns)
   transform: 'jq({ tweets: .return.python[2].result })'
+  transition: get-lang
+
+- id: get-lang
+  type: foreach
+  array: 'jq(.tweets)'
+  action:
+    # Get the contents for the Python code and the requirements from an
+    # internal Direktiv variable
+    files:
+    - key: get-lang.py
+      scope: workflow
+    secrets: ["GCP_KEY"]
+    # Call the Python container
+    function: python
+    input:
+      commands:
+      - command: pyenv local 3.8.13
+      - command: python3 get-lang.py -m jq(.tweet_text) -g jq(.secrets.GCP_KEY)
+
