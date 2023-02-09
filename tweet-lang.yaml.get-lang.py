@@ -59,7 +59,7 @@ def main(argv):
     for language in response.languages:
         dicts["langresult"] = [message, language.language_code, language.confidence]
 
-    print(json.dumps(dicts).encode())
+    print(json.dumps(dicts))
 
 if __name__ == "__main__":
    main(sys.argv[1:])
