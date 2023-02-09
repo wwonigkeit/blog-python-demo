@@ -25,3 +25,4 @@ states:
       - command: pyenv local 3.8.13
       - command: python3 -m pip install -r requirements.txt
       - command: python3 get-tweets.py -b jq(.bearer_token) -t jq(.twitter_searchstring) -m jq(.max_search_returns)
+  transform: 'jq({ tweets: .return.python[2].result })'
