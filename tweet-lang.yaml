@@ -43,5 +43,5 @@ states:
     input:
       commands:
       - command: pyenv local 3.8.13
-      - command: python3 get-lang.py -m "jq(.tweet_text)" -g jq(.secrets.GCP_KEY)
+      - command: python3 get-lang.py -m "'jq(.tweet_text)'" -g jq(.secrets.GCP_KEY)
 
