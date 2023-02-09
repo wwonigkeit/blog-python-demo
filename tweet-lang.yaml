@@ -8,20 +8,20 @@ functions:
     type: knative-workflow
 
 states:
-  - id: get-tweets
-    type: action
-    action:
-      # Get the contents for the Python code and the requirements from an
-      # internal Direktiv variable
-      files:
-      - key: py-tweets.py
-        scope: workflow
-      - key: requirements.txt
-        scope: workflow
-      # Call the Python container
-      function: python
-      input:
-        commands:
-        - command: pyenv local 3.8.13
-        - command: python3 -m pip install requirements.txt
-        - command: python3 get-tweets.py -b jq(.bearer_token) -t jq(.twitter_searchstring) -m jq(.max_search_returns)
+- id: get-tweets
+  type: action
+  action:
+    # Get the contents for the Python code and the requirements from an
+    # internal Direktiv variable
+    files:
+    - key: py-tweets.py
+      scope: workflow
+    - key: requirements.txt
+      scope: workflow
+    # Call the Python container
+    function: python
+    input:
+      commands:
+      - command: pyenv local 3.8.13
+      - command: python3 -m pip install -r requirements.txt
+      - command: python3 get-tweets.py -b jq(.bearer_token) -t jq(.twitter_searchstring) -m jq(.max_search_returns)
