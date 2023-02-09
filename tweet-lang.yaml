@@ -37,12 +37,12 @@ states:
     files:
     - key: get-lang.py
       scope: workflow
-    secrets: ["GCP_KEY"]
+    - key: gcp.key
+      scope: workflow
     # Call the Python container
     function: python
     input:
       commands:
       - command: pyenv local 3.8.13
-      - command: echo "'jq(.secrets.GCP_KEY)'" > gcp.json
-      - command: python3 get-lang.py -m '"jq(.tweet_text)"' -g gcp.json
+      - command: python3 get-lang.py -m '"jq(.tweet_text)"' -g gcp.key
 
