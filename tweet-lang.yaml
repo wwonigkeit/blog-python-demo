@@ -14,7 +14,7 @@ states:
     # Get the contents for the Python code and the requirements from an
     # internal Direktiv variable
     files:
-    - key: py-tweets.py
+    - key: get-tweets.py
       scope: workflow
     - key: requirements.txt
       scope: workflow
