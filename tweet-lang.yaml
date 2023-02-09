@@ -34,19 +34,14 @@ states:
   action:
     # Get the contents for the Python code and the requirements from an
     # internal Direktiv variable
-    # files:
-    # - key: get-lang.py
-    #   scope: workflow
-    # - name: gcp.key
-    #   data: |
-    #     jq(.secrets.GCP_KEY)
+    files:
+    - key: get-lang.py
+      scope: workflow
     # Call the Python container
     secrets: ["GCP_KEY"]
     function: python
     input:
       files:
-      - key: get-lang.py
-        scope: workflow
       - name: gcp.key
         data: |
           jq(.secrets.GCP_KEY)
