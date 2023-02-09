@@ -45,4 +45,5 @@ states:
       commands:
       - command: pyenv local 3.8.13
       - command: python3 get-lang.py -m "'jq(.tweet_text)'" -g gcp.key
+  transform: 'jq(del (.tweets) | .return[].python[1].result)'
 
