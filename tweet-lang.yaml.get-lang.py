@@ -53,15 +53,13 @@ def main(argv):
         print("Google Translate API returned the following error:", e)
         sys.exit()
 
+    dicts = {}
     # Display list of detected languages sorted by detection confidence.
     # The most probable language is first.
     for language in response.languages:
-        # The Tweet we analysed 
-        print("Twitter text: {}".format(message))
-        # The language detected
-        print("Language code: {}".format(language.language_code))
-        # Confidence of detection result for this language
-        print("Confidence: {}".format(language.confidence))
+        dicts["langresult"] = [message, language.language_code, language.confidence]
+
+    print(json.dumps(dicts).encode())
 
 if __name__ == "__main__":
    main(sys.argv[1:])
